@@ -13,4 +13,5 @@ Route::prefix('/register')->name('register.')->controller(UserRegisterController
 
 Route::controller(UserLoginController::class)->group(function () {
     Route::post('/logout', 'destroy')->name('logout');
+    Route::view('/login', 'layout')->name('login.create');
 });

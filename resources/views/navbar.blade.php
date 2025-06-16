@@ -21,11 +21,11 @@
             <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
 
                 <ul class="navbar-nav me-auto">
-                    <x-navbar.item href="/">Home</x-navbar.item>
+                    <x-navbar.item to="home">Home</x-navbar.item>
 
                     @guest
-                        <x-navbar.item href="register">Register</x-navbar.item>
-                        <x-navbar.item href="login">Login</x-navbar.item>
+                        <x-navbar.item to="register.create">Register</x-navbar.item>
+                        <x-navbar.item to="login.create">Login</x-navbar.item>
                     @endguest
                 </ul>
             </div>

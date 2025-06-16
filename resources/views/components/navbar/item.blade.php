@@ -1,5 +1,5 @@
-@props(['href'])
+@props(['to'])
 
 <li class="nav-item">
-    <a class="nav-link fw-medium {{request()->is($href) ? 'active' : ''}}" href="{{$href}}">{{$slot}}</a>
+    <a class="nav-link fw-medium {{request()->routeIs($to) ? 'active' : ''}}" href="{{route($to)}}">{{$slot}}</a>
 </li>
