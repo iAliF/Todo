@@ -1,6 +1,11 @@
 <div class="card mb-4 mt-4">
     <div class="card-body">
-        <form {{$attributes}}>
+        <form {{$attributes}} >
+            @if(strtolower($attributes["method"]) !== "GET")
+                @csrf
+                @method($attributes["method"])
+            @endif
+
             {{ $slot }}
 
             @if(!isset($buttons))

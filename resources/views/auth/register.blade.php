@@ -1,7 +1,8 @@
 @extends('layout')
 
 @section('mainContent')
-    <x-form.form action="/" method="POST">
+    <x-form.form :action="route('register.store')" method="POST">
+
         <x-form.input-group
             id="name"
             icon="ti-user"

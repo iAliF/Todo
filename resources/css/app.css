@@ -10,3 +10,12 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+.input-error {
+    display: block!important;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: red;
+}

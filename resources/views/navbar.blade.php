@@ -19,11 +19,6 @@
 
             <!-- Menu wrapper: Start -->
             <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
-                <button class="navbar-toggler border-0 text-heading position-absolute end-0 top-0 scaleX-n1-rtl"
-                        type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="ti ti-x ti-sm"></i>
-                </button>
 
                 <ul class="navbar-nav me-auto">
                     <x-navbar.item href="/">Home</x-navbar.item>
@@ -36,6 +31,33 @@
             </div>
             <div class="landing-menu-overlay d-lg-none"></div>
             <!-- Menu wrapper: End -->
+
+            <!-- Toolbar: Start -->
+            @auth
+                <ul class="navbar-nav flex-row ms-auto">
+                    <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
+                        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                           data-bs-toggle="dropdown">
+                            Hello, {{auth()->user()->name}}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                            <li>
+                                <form method="POST" action="{{route('logout')}}">
+                                    @csrf
+
+                                    <button type="submit" class="dropdown-item" data-theme="light">
+                                        <span class="align-middle">
+                                            <i class='ti ti-logout me-2'></i>
+                                            Logout
+                                        </span>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            @endauth
+            <!-- Toolbar: End -->
         </div>
     </div>
 </nav>
