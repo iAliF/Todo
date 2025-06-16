@@ -27,8 +27,11 @@
 
                 <ul class="navbar-nav me-auto">
                     <x-navbar.item href="/">Home</x-navbar.item>
-                    <x-navbar.item href="login">Login</x-navbar.item>
-                    <x-navbar.item href="register">Register</x-navbar.item>
+
+                    @guest
+                        <x-navbar.item href="register">Register</x-navbar.item>
+                        <x-navbar.item href="login">Login</x-navbar.item>
+                    @endguest
                 </ul>
             </div>
             <div class="landing-menu-overlay d-lg-none"></div>
