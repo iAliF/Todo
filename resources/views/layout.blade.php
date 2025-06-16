@@ -10,6 +10,8 @@
 <body>
 @include('navbar')
 
-@yield('mainContent')
+<div class="container">
+    @yield('mainContent')
+</div>
 </body>
 </html>
