@@ -16,14 +16,14 @@ class UserLoginController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'email' => 'required|email',
+            'phone' => 'required|numeric|digits:10',
             'password' => 'required'
         ]);
 
         $loggedIn = Auth::attempt($validated);
         if (!$loggedIn) {
-            ValidationException::withMessages([
-                "email" => ['The provided credentials are incorrect.']
+            throw ValidationException::withMessages([
+                "phone" => ['The provided credentials are incorrect.']
             ]);
         }
 
