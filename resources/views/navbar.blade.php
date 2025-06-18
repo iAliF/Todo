@@ -26,6 +26,8 @@
                     @guest
                         <x-navbar.item to="register.create">Register</x-navbar.item>
                         <x-navbar.item to="login.create">Login</x-navbar.item>
+                    @else
+                        <x-navbar.item to="dashboard.index">Dashboard</x-navbar.item>
                     @endguest
                 </ul>
             </div>
