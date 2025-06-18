@@ -16,7 +16,7 @@ class UserRegisterController extends Controller
     public function store(Request $request) {
         $validated = $request->validate([
             'name' => ['required', 'min:6'],
-            'phone' => ['required', 'numeric', 'digits:10'],
+            'phone' => ['required', 'numeric', 'digits:10', 'unique:users,phone'],
             'password' => ['required', 'min:8', 'confirmed'],
         ]);
 
