@@ -25,6 +25,9 @@ class DashboardController extends Controller
         );
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function store(Request $request) {
         $user = $request->user();
         $validated = $request->validate([
@@ -32,13 +35,16 @@ class DashboardController extends Controller
             'status' => ['required', Rule::enum(TodoStatus::class)]
         ]);
 
-        Todo::create([
+        $todo = Todo::create([
             'user_id' => $user->id,
             'content' => $validated['content'],
             'status' => $validated['status'],
         ]);
 
-        return ["ok" => true];
+        return [
+            "ok" => true,
+            "data" => view('components.todo.item', ['todo' => $todo])->render()
+        ];
     }
 
     public function destroy(Todo $todo)

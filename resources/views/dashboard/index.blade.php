@@ -13,9 +13,9 @@
     </div>
 
     <div class="row mt-5">
-        <x-todo.list heading="Todo" id="todo-list" :todos="$todoList"/>
-        <x-todo.list heading="In Progress" :todos="$inProgress"/>
-        <x-todo.list heading="Done" :todos="$done"/>
+        <x-todo.list data-list="todo" heading="Todo" id="todo-list" :todos="$todoList"/>
+        <x-todo.list data-list="in_progress" heading="In Progress" :todos="$inProgress"/>
+        <x-todo.list data-list="done" heading="Done" :todos="$done"/>
     </div>
 
     <!-- Todo => Move to another file -->

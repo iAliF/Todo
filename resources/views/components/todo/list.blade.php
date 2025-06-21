@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="card-body">
-            <ul class="p-0 m-0 list-unstyled">
+            <ul {{$attributes(["class"=>"p-0 m-0 list-unstyled"])}}>
                 @foreach($todos as $todo)
                     <x-todo.item :$todo />
                 @endforeach

@@ -8,6 +8,7 @@ $(document).ready(function () {
         dropdownParent: $('#addNewItemModal')
     });
 
+
     // Modal
     const modal = new Modal(document.getElementById('addNewItemModal'))
 
@@ -21,25 +22,24 @@ $(document).ready(function () {
             $(`li[data-id=${id}]`).remove();
             // Todo => Notify
         })
-        .catch(error => {
-            // Todo => Handle
-            console.log(error);
-        })
+            .catch(error => {
+                // Todo => Handle
+                console.log(error);
+            })
     })
 
     $("#addNewItemForm").submit(function (e) {
         const content = $("input[name='content']");
-        const status = $("select[name='status']");
+        const status = $("select[name='status']").val();
 
         axios.post(
             "/dashboard",
             {
                 content: content.val(),
-                status: status.val(),
+                status: status,
             }
         ).then(response => {
-            console.log("Done")
-            // TOdo => Handle
+            $(`ul[data-list="${status}"]`).append(response.data.data);
         }).catch(error => {
             console.log(error);
             // TOdo => Handle
