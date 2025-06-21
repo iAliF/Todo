@@ -38,7 +38,7 @@
             @auth
                 <ul class="navbar-nav flex-row ms-auto">
                     <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
-                        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                        <a class="nav-link dropdown-toggle" href="javascript:void(0);"
                            data-bs-toggle="dropdown">
                             Hello, {{auth()->user()->name}}
                         </a>

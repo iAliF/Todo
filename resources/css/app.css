@@ -19,3 +19,7 @@
     box-sizing: border-box;
     color: red;
 }
+
+.dropdown-toggle-hide-arrow > .dropdown-toggle::after, .dropdown-toggle-hide-arrow > .dropdown-toggle::before, .dropdown-toggle.hide-arrow::after, .dropdown-toggle.hide-arrow::before {
+    display: none;
+}

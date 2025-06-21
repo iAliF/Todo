@@ -1,5 +1,13 @@
+@section('metaTags')
+    @csrf
+@endsection
+
 @extends('layout')
 
 @section('mainContent')
-    <h1>Hello {{auth()->user()->name}}, Welcome.</h1>
+    <div class="row mt-5">
+        <x-todo.list :todos="$todoList"/>
+        <x-todo.list :todos="$inProgress"/>
+        <x-todo.list :todos="$done"/>
+    </div>
 @endsection

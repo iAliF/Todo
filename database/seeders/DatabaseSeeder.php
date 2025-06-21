@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->has(
             Todo::factory(20)
-        )->create();
+        )->create([
+            'password' => '12345678'
+        ]);
     }
 }

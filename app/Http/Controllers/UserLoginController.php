@@ -16,7 +16,7 @@ class UserLoginController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'phone' => 'required|numeric|digits:10',
+            'phone' => 'required',
             'password' => 'required'
         ]);
 
@@ -28,7 +28,7 @@ class UserLoginController extends Controller
         }
 
         $request->session()->regenerate();
-        return to_route('home');
+        return to_route('dashboard.index');
     }
 
     public function destroy()
