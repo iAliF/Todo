@@ -19,6 +19,7 @@
         "@popperjs/core": "^2.11.8",
         "@tabler/icons-webfont": "^3.34.0",
         "bootstrap": "^5.3.6",
-        "jquery": "^3.7.1"
+        "jquery": "^3.7.1",
+        "select2": "^4.1.0-rc.0"
     }
 }

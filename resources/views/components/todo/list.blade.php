@@ -1,10 +1,10 @@
-@props(['todos'])
+@props(['todos', 'heading'])
 
 <div class="col-xl-4 col-md-6 mb-4">
     <div class="card h-100">
         <div class="card-header">
             <div class="card-title mb-0">
-                <h5 class="mb-0">Todo</h5>
+                <h5 class="mb-0">{{$heading}}</h5>
             </div>
         </div>
         <div class="card-body">

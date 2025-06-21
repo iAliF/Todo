@@ -1,4 +1,8 @@
-<div class="card mb-4 mt-4">
+@props([
+    'noBorder' => 'false'
+])
+
+<div class="card mb-4 mt-4 {{strtolower($noBorder) === "true" ? 'border-0' : ''}}">
     <div class="card-body">
         <form {{$attributes}} >
             @if(strtolower($attributes["method"]) !== "GET")

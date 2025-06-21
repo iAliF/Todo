@@ -31,6 +31,7 @@ Route::prefix('/dashboard')
     ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        route::post('/', 'store')->name('store');
         Route::delete('/{todo}', 'destroy')->name('destroy')->can('delete,todo');
     });
 

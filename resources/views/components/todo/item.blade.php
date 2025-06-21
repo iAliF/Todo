@@ -1,6 +1,10 @@
 @props(['todo'])
 
-<li class="mb-4 pb-1" data-id="{{$todo->id}}">
+<li {{$attributes([
+    "class" => "mb-4 pb-1",
+    "data-id"=> $todo->id
+])}}
+>
     <div class="row align-items-start">
         <div class="col">
             <h6 class="mb-0 text-wrap">{{$todo->content}}</h6>
@@ -14,7 +18,7 @@
                 </button>
 
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="javascript:void(0);">
+                    <a class="dropdown-item edit-item" data-id="{{$todo->id}}" href="javascript:void(0);">
                         <i class="ti ti-pencil me-1"></i> Edit
                     </a>
                     <a class="dropdown-item delete-item" data-id="{{$todo->id}}" href="javascript:void(0);">
