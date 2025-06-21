@@ -3,7 +3,7 @@
 <div class="col-xl-4 col-md-6 mb-4">
     <div class="card h-100">
         <div class="card-header">
-            <div class="card-title mb-0">
+            <div class="card-title mb-0 py-2">
                 <h5 class="mb-0">{{$heading}}</h5>
             </div>
         </div>

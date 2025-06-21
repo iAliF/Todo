@@ -1,14 +1,6 @@
 import {Modal} from 'bootstrap'
 
 $(document).ready(function () {
-    // Configure select2
-    $('.status-select').select2({
-        placeholder: 'Status',
-        closeOnSelect: true,
-        dropdownParent: $('#addNewItemModal')
-    });
-
-
     // Modal
     const modal = new Modal(document.getElementById('addNewItemModal'))
 

@@ -7,7 +7,8 @@
 @section('mainContent')
     <div class="row align-items-start mt-4">
         <h1 class="col">Todos</h1>
-        <button type="button" class="btn btn-primary btn-md col col-auto me-2" data-bs-toggle="modal" data-bs-target="#addNewItemModal">
+        <button type="button" class="btn btn-primary btn-md col col-auto me-2" data-bs-toggle="modal"
+                data-bs-target="#addNewItemModal">
             Add
         </button>
     </div>
@@ -37,7 +38,7 @@
                             required
                         />
 
-                        <select class="status-select block mb-4" name="status">
+                        <select class="form-select mb-3" name="status">
                             <option value="todo">Todo</option>
                             <option value="in_progress">In Progress</option>
                             <option value="done">Done</option>
