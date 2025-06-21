@@ -11,3 +11,7 @@
         <x-todo.list :todos="$done"/>
     </div>
 @endsection
+
+@section('scripts')
+    @vite('resources/js/dashboard.js')
+@endsection

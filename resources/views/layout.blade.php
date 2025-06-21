@@ -14,5 +14,7 @@
 <div class="container">
     @yield('mainContent')
 </div>
+
+@yield('scripts')
 </body>
 </html>

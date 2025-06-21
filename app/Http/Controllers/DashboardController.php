@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Todo;
+
 class DashboardController extends Controller
 {
     public function index()
@@ -18,5 +20,11 @@ class DashboardController extends Controller
                 'done' => $todos->where('status', 'done'),
             ]
         );
+    }
+
+    public function destroy(Todo $todo)
+    {
+        $todo->delete();
+        return ['ok' => true];
     }
 }
