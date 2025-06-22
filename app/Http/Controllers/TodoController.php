@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TodoStatus;
+use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -30,14 +31,10 @@ class TodoController extends Controller
     /**
      * @throws Throwable
      */
-    public function store(Request $request): array
+    public function store(TodoRequest $request): array
     {
         $user = $request->user();
-        $validated = $request->validate([
-            'content' => 'required|min:3',
-            'status' => ['required', Rule::enum(TodoStatus::class)]
-        ]);
-
+        $validated = $request->validated();
         $todo = Todo::create([
             'user_id' => $user->id,
             'content' => $validated['content'],
@@ -47,6 +44,20 @@ class TodoController extends Controller
         return [
             "ok" => true,
             "data" => view('components.todo.item', ['todo' => $todo])->render()
+        ];
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function update(TodoRequest $request, Todo $todo): array
+    {
+        $validated = $request->validated();
+        $todo->update($validated);
+
+        return [
+            "ok" => true,
+            "data" => view('components.todo.item', ['todo' => $todo])->render(),
         ];
     }
 

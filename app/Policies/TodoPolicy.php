@@ -7,7 +7,7 @@ use App\Models\User;
 
 class TodoPolicy
 {
-    public function delete(User $user, Todo $todo): bool
+    public function edit(User $user, Todo $todo): bool
     {
         return $user->id === $todo->user_id;
     }

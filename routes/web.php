@@ -32,7 +32,8 @@ Route::prefix('/dashboard')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         route::post('/', 'store')->name('store');
-        Route::delete('/{todo}', 'destroy')->name('destroy')->can('delete,todo');
+        Route::patch('/{todo}', 'update')->name('update')->can('edit,todo');
+        Route::delete('/{todo}', 'destroy')->name('destroy')->can('edit,todo');
     });
 
 Route::post('/logout', [UserLoginController::class, 'destroy'])->name('logout');
