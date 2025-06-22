@@ -7,6 +7,7 @@
             icon="ti-phone"
             label="Phone Number"
             placeholder="9123456789"
+            :value="old('phone')"
             required
         />
 

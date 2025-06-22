@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class UserLoginController extends Controller
 {
-    public function create()
+    public function create(): View
     {
         return view('auth.login');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'phone' => 'required',
@@ -31,7 +33,7 @@ class UserLoginController extends Controller
         return to_route('dashboard.index');
     }
 
-    public function destroy()
+    public function destroy(): RedirectResponse
     {
         Auth::logout();
 

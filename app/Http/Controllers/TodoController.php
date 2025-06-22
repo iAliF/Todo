@@ -6,10 +6,12 @@ use App\Enums\TodoStatus;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\View\View;
+use Throwable;
 
-class DashboardController extends Controller
+class TodoController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $user = auth()->user()->load('todos');
         $todos = $user->todos;
@@ -26,9 +28,10 @@ class DashboardController extends Controller
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function store(Request $request) {
+    public function store(Request $request): array
+    {
         $user = $request->user();
         $validated = $request->validate([
             'content' => 'required|min:3',
@@ -47,7 +50,7 @@ class DashboardController extends Controller
         ];
     }
 
-    public function destroy(Todo $todo)
+    public function destroy(Todo $todo): array
     {
         $todo->delete();
         return ['ok' => true];

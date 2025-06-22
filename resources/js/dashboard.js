@@ -1,26 +1,46 @@
 import {Modal} from 'bootstrap'
 
+import Swal from 'sweetalert2'
+
+function showSuccessAlert(title, message = null) {
+    Swal.fire({
+        icon: "success",
+        title: title,
+        text: message
+    })
+}
+
+function showErrorAlert(title, message = null) {
+    Swal.fire({
+        icon: "error",
+        title: title,
+        text: message
+    })
+}
+
 $(document).ready(function () {
     // Modal
     const modal = new Modal(document.getElementById('addNewItemModal'))
 
+
+    // Delete item
     $('.delete-item').click(function (e) {
         e.preventDefault();
 
         const id = $(this).data('id');
         axios.delete(
             `/dashboard/${id}`
-        ).then(response => {
+        ).then(_ => {
             $(`li[data-id=${id}]`).remove();
-            // Todo => Notify
+            showSuccessAlert("Item has been deleted successfully")
+        }).catch(error => {
+            console.log(error);
+            showErrorAlert("Something went wrong", "Cannot Delete Item");
         })
-            .catch(error => {
-                // Todo => Handle
-                console.log(error);
-            })
     })
 
-    $("#addNewItemForm").submit(function (e) {
+    // Add new Item
+    $("#addNewItemForm").submit(function (_) {
         const content = $("input[name='content']");
         const status = $("select[name='status']").val();
 
@@ -32,13 +52,19 @@ $(document).ready(function () {
             }
         ).then(response => {
             $(`ul[data-list="${status}"]`).append(response.data.data);
+            content.val("")
+            modal.hide();
+            showSuccessAlert("Item has been added successfully")
         }).catch(error => {
-            console.log(error);
-            // TOdo => Handle
+            let message = (error.status === 422 && error.response.data.errors) ?
+                Object.values(error.response.data.errors)
+                    .flat()
+                    .join(" ") : null;
+
+            showErrorAlert("Cannot Add Item", message);
         })
 
-        content.val("")
-        modal.hide();
+
         return false; // prevent submitting
     })
 })

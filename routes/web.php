@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TodoController;
 use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\UserRegisterController;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +27,7 @@ Route::prefix('login')
 
 Route::prefix('/dashboard')
     ->name('dashboard.')
-    ->controller(DashboardController::class)
+    ->controller(TodoController::class)
     ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');
