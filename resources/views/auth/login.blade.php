@@ -6,7 +6,7 @@
             id="phone"
             icon="ti-phone"
             label="Phone Number"
-            placeholder="912 345 6789"
+            placeholder="9123456789"
             required
         />
 
