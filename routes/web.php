@@ -6,8 +6,6 @@ use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\UserRegisterController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'layout')->name('home');
-
 Route::prefix('/register')
     ->name('register.')
     ->middleware('guest')
@@ -38,7 +36,7 @@ Route::prefix('login/vc')
         Route::post('/verify', 'store')->name('store');
     });
 
-Route::prefix('/dashboard')
+Route::prefix('/')
     ->name('dashboard.')
     ->controller(TodoController::class)
     ->middleware('auth')
