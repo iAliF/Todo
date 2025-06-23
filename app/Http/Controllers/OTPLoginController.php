@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OTPGenerateRequest;
+use App\Http\Requests\OTPVerifyRequest;
 use App\Rules\UserExists;
+use App\Services\OTPService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -17,22 +19,13 @@ class OTPLoginController extends Controller
         return view('auth.otp_login');
     }
 
-    public function generate(Request $request): RedirectResponse
+    public function generate(OTPGenerateRequest $request, OTPService $service): RedirectResponse
     {
-        $rule = new UserExists();
+        $user = $request->getRuleUser();
+        $code = $service->generateCode($user); // Generate the code
+        $service->send($user, $code); // Send code to user
+        $service->saveToSession($user); // Send phone number to session
 
-        $validated = $request->validate([
-            'phone' => ['required', 'numeric', $rule],
-        ]);
-
-        $code = random_int(100_000, 999_999);
-        $rule->user->update([
-            'code' => $code,
-            'code_expire_at' => now()->addMinutes(2),
-        ]);
-
-        Log::debug("[{$validated['phone']}] Code => $code"); // Todo => Send SMS
-        session(['phone' => $validated['phone']]);
         return to_route('vc.verify');
     }
 
@@ -45,28 +38,11 @@ class OTPLoginController extends Controller
         return view('auth.otp_verify', ['phone' => session('phone')]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(OTPVerifyRequest $request, OTPService $service): RedirectResponse
     {
-        $rule = new UserExists();
-        $validated = $request->validate([
-            'phone' => ['required', 'numeric', $rule],
-            'code' => ['required', 'numeric'],
-        ]);
-        $user = $rule->user;
-        $code = (int) $validated['code'];
-
-        if ($code !== $user->code) {
-            throw ValidationException::withMessages([
-                'code' => ['Invalid login code.'],
-            ]);
-        }
-        $user->update([
-            'code_expire_at' => now()->addMinutes(-1),
-        ]);
-
-        session()->forget('phone');
-        Auth::login($user);
-        $request->session()->regenerate();
+        $user = $request->getRuleUser();
+        $service->validate($request, $user); // Validate or throw ValidateException
+        $service->login($request, $user); // Login User
         return to_route('dashboard.index');
     }
 }
