@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRegisterRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -15,13 +15,9 @@ class UserRegisterController extends Controller
         return view('auth.register');
     }
 
-    public function store(Request $request): RedirectResponse {
-        $validated = $request->validate([
-            'name' => ['required', 'min:6'],
-            'phone' => ['required', 'numeric', 'digits:10', 'unique:users,phone'],
-            'password' => ['required', 'min:8', 'confirmed'],
-        ]);
-
+    public function store(UserRegisterRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
         $user = User::query()->create($validated);
         Auth::login($user);
 

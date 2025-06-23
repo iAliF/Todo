@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserLoginRequest;
+use App\Services\LoginService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class UserLoginController extends Controller
@@ -15,28 +15,15 @@ class UserLoginController extends Controller
         return view('auth.login');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(UserLoginRequest $request, LoginService $service): RedirectResponse
     {
-        $validated = $request->validate([
-            'phone' => 'required',
-            'password' => 'required'
-        ]);
-
-        $loggedIn = Auth::attempt($validated);
-        if (!$loggedIn) {
-            throw ValidationException::withMessages([
-                "phone" => ['The provided credentials are incorrect.']
-            ]);
-        }
-
-        $request->session()->regenerate();
+        $service->attemptToLogin($request); // login or throw ValidationException
         return to_route('dashboard.index');
     }
 
     public function destroy(): RedirectResponse
     {
         Auth::logout();
-
         return to_route('login.create');
     }
 }

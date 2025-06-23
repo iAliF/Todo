@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
+use App\Services\TodoService;
 use Illuminate\View\View;
 use Throwable;
 
@@ -28,15 +29,9 @@ class TodoController extends Controller
     /**
      * @throws Throwable
      */
-    public function store(TodoRequest $request): array
+    public function store(TodoRequest $request, TodoService $service): array
     {
-        $user = $request->user();
-        $validated = $request->validated();
-        $todo = Todo::create([
-            'user_id' => $user->id,
-            'content' => $validated['content'],
-            'status' => $validated['status'],
-        ]);
+        $todo = $service->store($request);
 
         return [
             "ok" => true,
