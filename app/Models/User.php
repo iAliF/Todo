@@ -52,4 +52,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public static function findByPhone(string $phone): User {
+        return self::where('phone', $phone)->first();
+    }
 }

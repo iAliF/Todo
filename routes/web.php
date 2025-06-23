@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OTPLoginController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\UserRegisterController;
@@ -23,6 +24,14 @@ Route::prefix('login')
     ->group(function () {
         Route::get('/', 'create')->name('create');
         Route::post('/', 'store')->name('store');
+    });
+
+Route::prefix('login/vc')
+    ->name('vc.')
+    ->controller(OTPLoginController::class)
+    ->middleware('guest')
+    ->group(function () {
+        Route::get('/', 'create')->name('create');
     });
 
 Route::prefix('/dashboard')
