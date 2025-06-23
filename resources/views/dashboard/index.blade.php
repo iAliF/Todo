@@ -19,8 +19,8 @@
         <x-todo.list data-list="done" heading="Done" :todos="$done"/>
     </div>
 
-    <x-modal.form method="POST" title="Add New Item" modal-id="addNewItemModal" form-id="addNewItemForm" />
-    <x-modal.form method="PATCH" title="Edit Item" modal-id="editItemModal" form-id="editItemForm" />
+    <x-modal.form method="POST" title="Add New Item" modal-id="addNewItemModal" form-id="addNewItemForm"/>
+    <x-modal.form method="PATCH" title="Edit Item" modal-id="editItemModal" form-id="editItemForm"/>
 @endsection
 
 @section('scripts')

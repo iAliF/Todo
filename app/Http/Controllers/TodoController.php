@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\TodoStatus;
 use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Throwable;
 

@@ -114,7 +114,7 @@ $(document).ready(function () {
                 li.remove();
                 $(`ul[data-list="${status}"]`).append(response.data);
             } else {
-                li.replaceWith(response.data)
+                li.replaceWith(response.data);
             }
         },
         editModal,

@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OTPGenerateRequest;
 use App\Http\Requests\OTPVerifyRequest;
-use App\Rules\UserExists;
 use App\Services\OTPService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class OTPLoginController extends Controller
