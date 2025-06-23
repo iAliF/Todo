@@ -37,6 +37,6 @@ class UserLoginController extends Controller
     {
         Auth::logout();
 
-        return to_route('home');
+        return to_route('login.create');
     }
 }

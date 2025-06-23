@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'phone',
         'password',
+        'code',
+        'code_expire_at'
     ];
 
     /**
@@ -53,7 +55,7 @@ class User extends Authenticatable
         ];
     }
 
-    public static function findByPhone(string $phone): User {
+    public static function findByPhone(string $phone): ?User {
         return self::where('phone', $phone)->first();
     }
 }

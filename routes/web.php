@@ -32,6 +32,10 @@ Route::prefix('login/vc')
     ->middleware('guest')
     ->group(function () {
         Route::get('/', 'create')->name('create');
+        Route::post('/', 'generate')->name('generate');
+
+        Route::get('/verify', 'verifyForm')->name('verify');
+        Route::post('/verify', 'store')->name('store');
     });
 
 Route::prefix('/dashboard')
