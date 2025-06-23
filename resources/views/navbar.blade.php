@@ -21,8 +21,6 @@
             <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
 
                 <ul class="navbar-nav me-auto">
-                    <x-navbar.item to="home">Home</x-navbar.item>
-
                     @guest
                         <x-navbar.item to="register.create">Register</x-navbar.item>
                         <x-navbar.item to="login.create">Login</x-navbar.item>

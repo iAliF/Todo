@@ -31,5 +31,9 @@
             type="password"
             required
         />
+
+        <span class="d-inline-block mb-2">
+            Have an account? <a href="{{route('login.create')}}">Login here</a>
+        </span>
     </x-form.form>
 @endsection

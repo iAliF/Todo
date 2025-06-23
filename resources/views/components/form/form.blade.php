@@ -5,7 +5,7 @@
 
 
 <div class="row justify-content-center px-4">
-    <div class="col-sm-12 col-md-10 col-lg-6 card my-4 {{strtolower($noBorder) === "true" ? 'border-0' : ''}}">
+    <div class="card my-4 {{strtolower($noBorder) === "true" ? 'border-0 col-12' : 'col-sm-12 col-md-10 col-lg-6'}}">
 
         <div class="card-body">
             @if(isset($header))

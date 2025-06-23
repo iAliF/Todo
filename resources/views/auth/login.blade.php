@@ -18,5 +18,9 @@
             type="password"
             required
         />
+
+        <span class="mb-2 d-inline-block">
+            Don't have an account? <a href="{{route('register.create')}}">Register here</a>
+        </span>
     </x-form.form>
 @endsection

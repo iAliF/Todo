@@ -67,7 +67,7 @@ $(document).ready(function () {
 
         const id = $(this).data('id');
         axios.delete(
-            `/dashboard/${id}`
+            `/${id}`
         ).then(_ => {
             $(`li[data-id=${id}]`).remove();
             showSuccessAlert("Item has been deleted successfully");
@@ -80,7 +80,7 @@ $(document).ready(function () {
     // Add new Item form in modal
     useFormHelper(
         "#addNewItemForm",
-        (data) => axios.post("/dashboard", data),
+        (data) => axios.post("/", data),
         ({status, response}) => $(`ul[data-list="${status}"]`).append(response.data),
         addModal,
         "Item has been added successfully",
@@ -88,7 +88,7 @@ $(document).ready(function () {
     );
 
     // Edit item button click
-    $(".edit-item").click(function (e) {
+    $("ul").on("click", ".edit-item", function (e) {
         e.preventDefault();
 
         currentItem = $(this).data('id');
@@ -105,7 +105,7 @@ $(document).ready(function () {
     // Edit Item
     useFormHelper(
         "#editItemForm",
-        (data) => axios.patch(`/dashboard/${currentItem}`, data),
+        (data) => axios.patch(`/${currentItem}`, data),
         ({status, response}) => {
             let li = $(`li[data-id='${currentItem}']`);
             const currentStatus = li.closest("[data-list]").data('list');
