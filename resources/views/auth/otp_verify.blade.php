@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('mainContent')
-    <x-form.form :action="route('vc.store')" method="POST">
+    <x-form.form :action="route('vc.store')" method="POST" header="Login With OTP">
         <input type="hidden" name="phone" value="{{old('phone', session('phone'))}}"/>
 
         <x-form.input-group

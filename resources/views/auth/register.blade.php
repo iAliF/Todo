@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('mainContent')
-    <x-form.form :action="route('register.store')" method="POST">
+    <x-form.form :action="route('register.store')" method="POST" header="Register">
 
         <x-form.input-group
             id="name"

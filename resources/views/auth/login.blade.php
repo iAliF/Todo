@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('mainContent')
-    <x-form.form :action="route('login.store')" method="POST">
+    <x-form.form :action="route('login.store')" method="POST" header="Login">
         <x-form.input-group
             id="phone"
             icon="ti-phone"
