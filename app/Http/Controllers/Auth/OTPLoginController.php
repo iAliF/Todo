@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\OTPGenerateRequest;
 use App\Http\Requests\OTPVerifyRequest;
-use App\Services\OTPService;
+use App\Services\Auth\OTPService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 

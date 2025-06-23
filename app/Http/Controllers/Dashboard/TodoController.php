@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
-use App\Services\TodoService;
+use App\Services\Dashboard\TodoService;
 use Illuminate\View\View;
 use Throwable;
 

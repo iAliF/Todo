@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\OTPLoginController;
-use App\Http\Controllers\TodoController;
-use App\Http\Controllers\UserLoginController;
-use App\Http\Controllers\UserRegisterController;
+use App\Http\Controllers\Auth\OTPLoginController;
+use App\Http\Controllers\Auth\UserLoginController;
+use App\Http\Controllers\Auth\UserRegisterController;
+use App\Http\Controllers\Dashboard\TodoController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/register')
