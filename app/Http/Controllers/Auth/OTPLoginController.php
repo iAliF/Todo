@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OTPGenerateRequest;
 use App\Http\Requests\OTPVerifyRequest;
 use App\Services\Auth\OTPService;
+use App\Services\SMS\SMSService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -16,12 +17,16 @@ class OTPLoginController extends Controller
         return view('auth.otp_login');
     }
 
-    public function generate(OTPGenerateRequest $request, OTPService $service): RedirectResponse
+    public function generate(OTPGenerateRequest $request, OTPService $otpService, SMSService $smsService): RedirectResponse
     {
         $user = $request->getRuleUser();
-        $code = $service->generateCode($user); // Generate the code
-        $service->send($user, $code); // Send code to user
-        $service->saveToSession($user); // Send phone number to session
+        $code = $otpService->generateCode($user); // Generate the code
+        if (!$otpService->send($smsService, $user, $code)) { // Send code to user
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                "phone" => ['Could not send OTP code. Please try again.'],
+            ]);
+        }
+        $otpService->saveToSession($user); // Send phone number to session
 
         return to_route('vc.verify');
     }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Dashboard\TodoController;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/logout', [UserLoginController::class, 'destroy'])->name('logout');
+
 Route::prefix('/register')
     ->name('register.')
     ->middleware('guest')
@@ -46,6 +48,4 @@ Route::prefix('/')
         Route::patch('/{todo}', 'update')->name('update')->can('edit,todo');
         Route::delete('/{todo}', 'destroy')->name('destroy')->can('edit,todo');
     });
-
-Route::post('/logout', [UserLoginController::class, 'destroy'])->name('logout');
 

@@ -4,8 +4,8 @@ namespace App\Services\Auth;
 
 use App\Http\Requests\OTPVerifyRequest;
 use App\Models\User;
+use App\Services\SMS\SMSService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Random\RandomException;
 
@@ -30,17 +30,17 @@ class OTPService
     }
 
 
-    public function send(User $user, int $code): void
+    public function send(SMSService $smsService, User $user, int $code): bool
     {
-        Log::debug("[{$user->phone}] OTP Code => $code");
-        // Todo => Send SMS
+        return $smsService->sendCode($user->phone, $code);
     }
 
     public function validate(OTPVerifyRequest $request, User $user): void
     {
         $code = (int)$request->validated()['code'];
 
-        if ($code !== $user->code || !$user->code_expire_at || now()->lt($user->code_expire_at)) {
+        if ($code !== $user->code || !$user->code_expire_at || now()->gt($user->code_expire_at)) {
+
             throw ValidationException::withMessages([
                 'code' => ['Invalid login code.'],
             ]);
