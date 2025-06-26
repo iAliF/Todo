@@ -4,7 +4,6 @@ namespace App\Services\Auth;
 
 use App\Http\Requests\OTPVerifyRequest;
 use App\Models\User;
-use App\Services\SMS\SMSService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Random\RandomException;
@@ -27,12 +26,6 @@ class OTPService
         }
 
         return $code;
-    }
-
-
-    public function send(SMSService $smsService, User $user, int $code): bool
-    {
-        return $smsService->sendCode($user->phone, $code);
     }
 
     public function validate(OTPVerifyRequest $request, User $user): void

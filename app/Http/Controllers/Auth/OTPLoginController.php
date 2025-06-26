@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Facades\SMS;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OTPGenerateRequest;
 use App\Http\Requests\OTPVerifyRequest;
 use App\Services\Auth\OTPService;
-use App\Services\SMS\SMSService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class OTPLoginController extends Controller
@@ -17,12 +18,12 @@ class OTPLoginController extends Controller
         return view('auth.otp_login');
     }
 
-    public function generate(OTPGenerateRequest $request, OTPService $otpService, SMSService $smsService): RedirectResponse
+    public function generate(OTPGenerateRequest $request, OTPService $otpService): RedirectResponse
     {
         $user = $request->getRuleUser();
         $code = $otpService->generateCode($user); // Generate the code
-        if (!$otpService->send($smsService, $user, $code)) { // Send code to user
-            throw \Illuminate\Validation\ValidationException::withMessages([
+        if (!SMS::send($user->phone, $code, 'sms_ir')) { // Send code to user
+            throw ValidationException::withMessages([
                 "phone" => ['Could not send OTP code. Please try again.'],
             ]);
         }

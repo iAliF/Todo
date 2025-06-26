@@ -2,6 +2,7 @@
 
 namespace App\Services\SMS;
 
+use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Support\Facades\Log;
 use Ipe\Sdk\Exceptions\SmsException;
 use Ipe\Sdk\Facades\SmsIr;
@@ -32,7 +33,7 @@ class SMSIrService implements SMSService
                 ]
             );
             return $response->status === 1 && $response->message === "موفق";
-        } catch (SmsException $e) {
+        } catch (SmsException | ConnectException $e) {
             Log::error($e->getMessage());
             return false;
         }

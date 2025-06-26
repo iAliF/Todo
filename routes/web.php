@@ -48,4 +48,3 @@ Route::prefix('/')
         Route::patch('/{todo}', 'update')->name('update')->can('edit,todo');
         Route::delete('/{todo}', 'destroy')->name('destroy')->can('edit,todo');
     });
-
