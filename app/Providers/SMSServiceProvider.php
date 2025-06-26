@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\SMS\KavenegarService;
 use App\Services\SMS\LogSMSService;
 use App\Services\SMS\SMSIrService;
 use App\Services\SMS\SMSService;
@@ -17,6 +18,7 @@ class SMSServiceProvider extends ServiceProvider
         $this->app->singleton(SMSService::class, function ($app) {
             return match (config('sms.default')) {
                 'sms_ir' => new SMSIrService(),
+                'kavenegar' => new KavenegarService(),
                 default => new LogSMSService(),
             };
         });
